@@ -30,9 +30,9 @@ export function createParticles({ scene, onTick, isMobile }: Core) {
   canvas.width = 32; canvas.height = 32
   const ctx = canvas.getContext('2d')!
   const grad = ctx.createRadialGradient(16, 16, 0, 16, 16, 16)
-  grad.addColorStop(0, 'rgba(160,158,245,1)')
-  grad.addColorStop(0.4, 'rgba(83,74,183,0.6)')
-  grad.addColorStop(1, 'rgba(83,74,183,0)')
+  grad.addColorStop(0, 'rgba(224,136,248,1)')
+  grad.addColorStop(0.4, 'rgba(168,34,221,0.6)')
+  grad.addColorStop(1, 'rgba(168,34,221,0)')
   ctx.fillStyle = grad
   ctx.fillRect(0, 0, 32, 32)
   const sprite = new THREE.CanvasTexture(canvas)

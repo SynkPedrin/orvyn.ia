@@ -21,7 +21,7 @@ export function FinalCTA() {
       <div
         className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[500px] rounded-full pointer-events-none"
         style={{
-          background: 'radial-gradient(ellipse, rgba(83,74,183,0.12) 0%, transparent 70%)',
+          background: 'radial-gradient(ellipse, rgba(168,34,221,0.12) 0%, transparent 70%)',
           filter: 'blur(40px)',
         }}
       />
@@ -37,10 +37,10 @@ export function FinalCTA() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-12"
         >
-          <div className="w-8 h-px" style={{ background: '#534AB7' }} />
+          <div className="w-8 h-px" style={{ background: '#A822DD' }} />
           <span
             className="text-[11px] font-semibold tracking-widest uppercase"
-            style={{ color: '#534AB7' }}
+            style={{ color: '#A822DD' }}
           >
             VAMOS COMEÇAR
           </span>
@@ -56,9 +56,9 @@ export function FinalCTA() {
           <motion.div
             animate={{
               filter: [
-                'drop-shadow(0 0 24px rgba(83,74,183,0.4))',
-                'drop-shadow(0 0 64px rgba(83,74,183,0.85))',
-                'drop-shadow(0 0 24px rgba(83,74,183,0.4))',
+                'drop-shadow(0 0 24px rgba(168,34,221,0.4))',
+                'drop-shadow(0 0 64px rgba(168,34,221,0.85))',
+                'drop-shadow(0 0 24px rgba(168,34,221,0.4))',
               ],
             }}
             transition={{ duration: 2.5, repeat: Infinity }}

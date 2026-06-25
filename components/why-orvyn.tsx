@@ -44,14 +44,14 @@ function DifferentialCard({ item, index }: { item: (typeof differentials)[0]; in
       style={{
         background: hovered ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.65)',
         border: '1px solid',
-        borderColor: hovered ? 'rgba(83,74,183,0.3)' : 'rgba(26,26,46,0.09)',
-        boxShadow: hovered ? '0 0 50px rgba(83,74,183,0.07)' : '0 4px 20px rgba(0,0,0,0.04)',
+        borderColor: hovered ? 'rgba(168,34,221,0.3)' : 'rgba(26,26,46,0.09)',
+        boxShadow: hovered ? '0 0 50px rgba(168,34,221,0.07)' : '0 4px 20px rgba(0,0,0,0.04)',
       }}
     >
       {/* Number */}
       <span
         className="font-display font-bold text-5xl block mb-6 leading-none transition-colors duration-500"
-        style={{ color: hovered ? 'rgba(83,74,183,0.5)' : 'rgba(83,74,183,0.15)' }}
+        style={{ color: hovered ? 'rgba(168,34,221,0.5)' : 'rgba(168,34,221,0.15)' }}
       >
         {item.number}
       </span>
@@ -60,12 +60,12 @@ function DifferentialCard({ item, index }: { item: (typeof differentials)[0]; in
       <div
         className="w-14 h-14 rounded-lg mb-6 flex items-center justify-center transition-all duration-300"
         style={{
-          background: hovered ? 'rgba(83,74,183,0.2)' : 'rgba(83,74,183,0.1)',
+          background: hovered ? 'rgba(168,34,221,0.2)' : 'rgba(168,34,221,0.1)',
           border: '1px solid',
-          borderColor: hovered ? 'rgba(83,74,183,0.4)' : 'rgba(83,74,183,0.2)',
+          borderColor: hovered ? 'rgba(168,34,221,0.4)' : 'rgba(168,34,221,0.2)',
         }}
       >
-        <Icon className="w-7 h-7 transition-colors duration-300" style={{ color: '#7B74E0' }} />
+        <Icon className="w-7 h-7 transition-colors duration-300" style={{ color: '#CC55EC' }} />
       </div>
 
       {/* Title */}
@@ -101,10 +101,10 @@ export function WhyOrvyn() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-10"
         >
-          <div className="w-8 h-px" style={{ background: '#534AB7' }} />
+          <div className="w-8 h-px" style={{ background: '#A822DD' }} />
           <span
             className="text-[11px] font-semibold tracking-widest uppercase"
-            style={{ color: '#534AB7' }}
+            style={{ color: '#A822DD' }}
           >
             DIFERENCIAIS
           </span>

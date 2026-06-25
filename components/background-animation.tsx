@@ -39,7 +39,7 @@ export function BackgroundAnimation() {
           top: '-5%',
           width: 600,
           height: 600,
-          background: 'radial-gradient(circle, rgba(83,74,183,0.05) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(168,34,221,0.05) 0%, transparent 70%)',
         }}
         animate={{ x: [0, 30, 0], y: [0, 20, 0] }}
         transition={{ duration: 25, repeat: Infinity, ease: 'easeInOut' }}
@@ -53,7 +53,7 @@ export function BackgroundAnimation() {
           bottom: '-5%',
           width: 700,
           height: 700,
-          background: 'radial-gradient(circle, rgba(83,74,183,0.04) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(168,34,221,0.04) 0%, transparent 70%)',
         }}
         animate={{ x: [0, -20, 0], y: [0, -15, 0] }}
         transition={{ duration: 30, repeat: Infinity, ease: 'easeInOut', delay: -10 }}
@@ -69,8 +69,8 @@ export function BackgroundAnimation() {
             top: `${p.top}%`,
             width: p.size,
             height: p.size,
-            background: 'rgba(83,74,183,0.25)',
-            boxShadow: '0 0 8px rgba(83,74,183,0.2)',
+            background: 'rgba(168,34,221,0.25)',
+            boxShadow: '0 0 8px rgba(168,34,221,0.2)',
           }}
           animate={{ y: [0, -80, 0], x: [0, p.xDrift, 0], opacity: [0, 0.6, 0] }}
           transition={{ duration: p.duration, delay: p.delay, repeat: Infinity, ease: 'easeInOut' }}

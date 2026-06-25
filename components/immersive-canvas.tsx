@@ -106,15 +106,15 @@ export function ImmersiveCanvas() {
 
     ctx.beginPath()
     ctx.arc(cx, cy, r, -Math.PI / 2, 1.5 * Math.PI)
-    ctx.strokeStyle = 'rgba(160,158,245,0.15)'
+    ctx.strokeStyle = 'rgba(224,136,248,0.15)'
     ctx.lineWidth = 2
     ctx.stroke()
 
     ctx.beginPath()
     ctx.arc(cx, cy, r, -Math.PI / 2, -Math.PI / 2 + Math.PI * 2 * progress)
     const g = ctx.createLinearGradient(0, 0, s, s)
-    g.addColorStop(0, '#A09EF5')
-    g.addColorStop(1, '#534AB7')
+    g.addColorStop(0, '#E088F8')
+    g.addColorStop(1, '#A822DD')
     ctx.strokeStyle = g
     ctx.lineWidth = 2.5
     ctx.lineCap = 'round'
@@ -150,7 +150,7 @@ export function ImmersiveCanvas() {
               width: 260, height: 260,
               left: '50%', top: '50%',
               transform: 'translate(-50%,-50%)',
-              background: 'radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(160,158,245,0.8) 30%, rgba(83,74,183,0.4) 60%, transparent 75%)',
+              background: 'radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(224,136,248,0.8) 30%, rgba(168,34,221,0.4) 60%, transparent 75%)',
               filter: 'blur(10px)',
             }}
           />
@@ -261,7 +261,7 @@ export function ImmersiveCanvas() {
                       width: 8, height: 8,
                       left: '50%', top: '50%',
                       transform: 'translate(-50%,-50%)',
-                      background: holding ? '#A09EF5' : 'rgba(160,158,245,0.5)',
+                      background: holding ? '#E088F8' : 'rgba(224,136,248,0.5)',
                     }}
                     animate={{ scale: holding ? [1, 1.4, 1] : [1, 1.15, 1], opacity: [0.6, 1, 0.6] }}
                     transition={{ duration: holding ? 0.4 : 1.8, repeat: Infinity }}
@@ -271,7 +271,7 @@ export function ImmersiveCanvas() {
                 <div className="text-right">
                   <motion.p
                     className="text-xs sm:text-sm font-semibold tracking-widest uppercase"
-                    animate={{ color: holding ? '#A09EF5' : 'rgba(255,255,255,0.55)' }}
+                    animate={{ color: holding ? '#E088F8' : 'rgba(255,255,255,0.55)' }}
                     transition={{ duration: 0.2 }}
                   >
                     {loaded ? 'CLIQUE E SEGURE' : 'CARREGANDO…'}
@@ -289,7 +289,7 @@ export function ImmersiveCanvas() {
               animate={{ scaleX: 1 }}
               transition={{ delay: 1.4, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
               className="absolute bottom-0 left-0 right-0 h-px origin-left"
-              style={{ background: 'linear-gradient(90deg,transparent,rgba(83,74,183,0.35),transparent)' }}
+              style={{ background: 'linear-gradient(90deg,transparent,rgba(168,34,221,0.35),transparent)' }}
             />
 
             {/* Loading dots */}
@@ -306,7 +306,7 @@ export function ImmersiveCanvas() {
                     <motion.div
                       key={i}
                       className="w-1 h-1 rounded-full"
-                      style={{ background: '#7B74E0' }}
+                      style={{ background: '#CC55EC' }}
                       animate={{ opacity: [0.2, 1, 0.2] }}
                       transition={{ duration: 1, repeat: Infinity, delay: i * 0.2 }}
                     />

@@ -51,14 +51,14 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
       style={{
         background: hovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.65)',
         border: '1px solid',
-        borderColor: hovered ? 'rgba(83,74,183,0.3)' : 'rgba(26,26,46,0.09)',
-        boxShadow: hovered ? '0 0 50px rgba(83,74,183,0.07)' : '0 4px 20px rgba(0,0,0,0.04)',
+        borderColor: hovered ? 'rgba(168,34,221,0.3)' : 'rgba(26,26,46,0.09)',
+        boxShadow: hovered ? '0 0 50px rgba(168,34,221,0.07)' : '0 4px 20px rgba(0,0,0,0.04)',
       }}
     >
       {/* Number */}
       <span
         className="font-display font-bold text-5xl sm:text-6xl mb-6 block transition-colors duration-500 leading-none"
-        style={{ color: hovered ? 'rgba(83,74,183,0.5)' : 'rgba(83,74,183,0.08)' }}
+        style={{ color: hovered ? 'rgba(168,34,221,0.5)' : 'rgba(168,34,221,0.08)' }}
       >
         {pillar.number}
       </span>
@@ -67,14 +67,14 @@ function PillarCard({ pillar, index }: { pillar: (typeof pillars)[0]; index: num
       <div
         className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 transition-all duration-500"
         style={{
-          background: hovered ? 'rgba(83,74,183,0.15)' : 'rgba(26,26,46,0.04)',
+          background: hovered ? 'rgba(168,34,221,0.15)' : 'rgba(26,26,46,0.04)',
           border: '1px solid',
-          borderColor: hovered ? 'rgba(83,74,183,0.4)' : 'rgba(26,26,46,0.1)',
+          borderColor: hovered ? 'rgba(168,34,221,0.4)' : 'rgba(26,26,46,0.1)',
         }}
       >
         <Icon
           className="w-6 h-6 transition-colors duration-500"
-          style={{ color: hovered ? '#534AB7' : 'rgba(26,26,46,0.55)' }}
+          style={{ color: hovered ? '#A822DD' : 'rgba(26,26,46,0.55)' }}
         />
       </div>
 
@@ -108,10 +108,10 @@ export function Pillars() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-16"
         >
-          <div className="w-8 h-px" style={{ background: '#534AB7' }} />
+          <div className="w-8 h-px" style={{ background: '#A822DD' }} />
           <span
             className="text-[11px] font-semibold tracking-widest uppercase"
-            style={{ color: '#534AB7' }}
+            style={{ color: '#A822DD' }}
           >
             SOLUÇÃO COMPLETA
           </span>

@@ -53,8 +53,8 @@ function TestimonialCard({
       style={{
         background: hovered ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.65)',
         border: '1px solid',
-        borderColor: hovered ? 'rgba(83,74,183,0.3)' : 'rgba(26,26,46,0.09)',
-        boxShadow: hovered ? '0 0 40px rgba(83,74,183,0.07)' : '0 4px 20px rgba(0,0,0,0.04)',
+        borderColor: hovered ? 'rgba(168,34,221,0.3)' : 'rgba(26,26,46,0.09)',
+        boxShadow: hovered ? '0 0 40px rgba(168,34,221,0.07)' : '0 4px 20px rgba(0,0,0,0.04)',
       }}
     >
       {/* Stars */}
@@ -73,7 +73,7 @@ function TestimonialCard({
       <div className="flex items-center gap-3">
         <div
           className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold text-sm flex-shrink-0"
-          style={{ background: 'linear-gradient(135deg, #534AB7 0%, #7B74E0 100%)' }}
+          style={{ background: 'linear-gradient(135deg, #A822DD 0%, #CC55EC 100%)' }}
         >
           {initials}
         </div>
@@ -107,10 +107,10 @@ export function Testimonials() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-10"
         >
-          <div className="w-8 h-px" style={{ background: '#534AB7' }} />
+          <div className="w-8 h-px" style={{ background: '#A822DD' }} />
           <span
             className="text-[11px] font-semibold tracking-widest uppercase"
-            style={{ color: '#534AB7' }}
+            style={{ color: '#A822DD' }}
           >
             DEPOIMENTOS
           </span>

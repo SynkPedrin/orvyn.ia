@@ -31,7 +31,7 @@ export function TextMarquee() {
             key={i}
             className="text-xs sm:text-sm font-medium tracking-widest uppercase whitespace-nowrap flex-shrink-0"
             style={{
-              color: word === '·' ? 'rgba(83,74,183,0.5)' : 'rgba(26,26,46,0.4)',
+              color: word === '·' ? 'rgba(168,34,221,0.5)' : 'rgba(26,26,46,0.4)',
             }}
           >
             {word}

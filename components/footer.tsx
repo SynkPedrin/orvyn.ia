@@ -119,7 +119,7 @@ export function Footer() {
                       aria-label="Instagram ORVYN"
                       title="@orvyn.ia"
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                      style={{ background: 'rgba(83,74,183,0.15)' }}
+                      style={{ background: 'rgba(168,34,221,0.15)' }}
                     >
                       <InstagramIcon className="w-5 h-5 text-white" />
                     </Link>
@@ -134,7 +134,7 @@ export function Footer() {
                       aria-label="Instagram CEO Pedro Gabriel"
                       title="@pedro.gaabriiel"
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                      style={{ background: 'rgba(83,74,183,0.15)' }}
+                      style={{ background: 'rgba(168,34,221,0.15)' }}
                     >
                       <InstagramIcon className="w-5 h-5" style={{ color: 'rgba(196,181,253,0.8)' }} />
                     </Link>
@@ -148,7 +148,7 @@ export function Footer() {
                       rel="noopener noreferrer"
                       aria-label="GitHub"
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                      style={{ background: 'rgba(83,74,183,0.15)' }}
+                      style={{ background: 'rgba(168,34,221,0.15)' }}
                     >
                       <GithubIcon className="w-5 h-5 text-white" />
                     </Link>
@@ -160,7 +160,7 @@ export function Footer() {
                       href="#"
                       aria-label="LinkedIn"
                       className="w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-300"
-                      style={{ background: 'rgba(83,74,183,0.15)' }}
+                      style={{ background: 'rgba(168,34,221,0.15)' }}
                     >
                       <LinkedinIcon className="w-5 h-5 text-white" />
                     </Link>
@@ -253,7 +253,7 @@ export function Footer() {
                       <span>@orvyn.ia</span>
                       <span
                         className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                        style={{ background: 'rgba(83,74,183,0.3)', color: '#c4b5fd' }}
+                        style={{ background: 'rgba(168,34,221,0.3)', color: '#c4b5fd' }}
                       >
                         empresa
                       </span>
@@ -269,7 +269,7 @@ export function Footer() {
                       <span>@pedro.gaabriiel</span>
                       <span
                         className="text-[10px] px-1.5 py-0.5 rounded-full font-medium"
-                        style={{ background: 'rgba(83,74,183,0.2)', color: '#c4b5fd' }}
+                        style={{ background: 'rgba(168,34,221,0.2)', color: '#c4b5fd' }}
                       >
                         ceo
                       </span>

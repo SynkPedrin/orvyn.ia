@@ -45,9 +45,9 @@ function IconBall({
         style={{
           width: isDesktop ? 96 : 72,
           height: isDesktop ? 96 : 72,
-          background: hovered ? 'rgba(83,74,183,0.12)' : '#F0EFFA',
-          border: hovered ? '1.5px solid rgba(83,74,183,0.5)' : '1.5px solid rgba(26,26,46,0.08)',
-          boxShadow: hovered ? '0 0 28px rgba(83,74,183,0.35)' : 'none',
+          background: hovered ? 'rgba(168,34,221,0.12)' : '#F0EFFA',
+          border: hovered ? '1.5px solid rgba(168,34,221,0.5)' : '1.5px solid rgba(26,26,46,0.08)',
+          boxShadow: hovered ? '0 0 28px rgba(168,34,221,0.35)' : 'none',
           animation: `float-wave 3.5s ease-in-out ${floatDelay}s infinite`,
         }}
       >
@@ -55,7 +55,7 @@ function IconBall({
           style={{
             width: isDesktop ? 28 : 22,
             height: isDesktop ? 28 : 22,
-            color: hovered ? '#534AB7' : 'rgba(26,26,46,0.5)',
+            color: hovered ? '#A822DD' : 'rgba(26,26,46,0.5)',
             transition: 'color 0.3s ease',
           }}
           strokeWidth={1.5}

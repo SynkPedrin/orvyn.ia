@@ -43,10 +43,10 @@ export function Products() {
         >
           {/* Section label */}
           <div className="flex items-center gap-4 mb-8">
-            <div className="w-8 h-px" style={{ background: '#534AB7' }} />
+            <div className="w-8 h-px" style={{ background: '#A822DD' }} />
             <span
               style={{
-                color: '#534AB7',
+                color: '#A822DD',
                 fontSize: '11px',
                 fontWeight: 600,
                 letterSpacing: '0.15em',
@@ -92,7 +92,7 @@ export function Products() {
               {/* Product Screenshot with parallax */}
               <div ref={imageRef} className="overflow-hidden rounded-2xl">
                 <motion.div
-                  style={{ y: imageY, boxShadow: '0 25px 60px rgba(83,74,183,0.2)' }}
+                  style={{ y: imageY, boxShadow: '0 25px 60px rgba(168,34,221,0.2)' }}
                   whileHover={{ scale: 1.02 }}
                   transition={{ duration: 0.5 }}
                   className="shadow-2xl"
@@ -111,9 +111,9 @@ export function Products() {
                 <div
                   className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-4 sm:mb-6"
                   style={{
-                    background: 'rgba(83,74,183,0.15)',
-                    color: '#A09EF5',
-                    border: '1px solid rgba(83,74,183,0.3)',
+                    background: 'rgba(168,34,221,0.15)',
+                    color: '#E088F8',
+                    border: '1px solid rgba(168,34,221,0.3)',
                   }}
                 >
                   <span>CRM — ADVOCACIA &amp; GESTÃO JURÍDICA</span>
@@ -124,7 +124,7 @@ export function Products() {
                 >
                   Rulles IA
                 </h3>
-                <p className="text-lg font-medium mb-4" style={{ color: '#A09EF5' }}>
+                <p className="text-lg font-medium mb-4" style={{ color: '#E088F8' }}>
                   O CRM com IA nichado para advogados.
                 </p>
                 <p className="text-base leading-relaxed mb-8" style={{ color: 'rgba(26,26,46,0.55)' }}>
@@ -146,7 +146,7 @@ export function Products() {
                       <div key={feature.text} className="flex gap-3 items-start">
                         <Icon
                           className="w-5 h-5 flex-shrink-0 mt-0.5"
-                          style={{ color: '#7B74E0' }}
+                          style={{ color: '#CC55EC' }}
                         />
                         <span className="text-sm" style={{ color: 'rgba(26,26,46,0.7)' }}>
                           {feature.text}
@@ -163,8 +163,8 @@ export function Products() {
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 px-6 py-3 text-white rounded-lg font-medium transition-all duration-200"
                     style={{
-                      background: 'linear-gradient(135deg, #534AB7 0%, #7B74E0 100%)',
-                      boxShadow: '0 8px 24px rgba(83,74,183,0.35)',
+                      background: 'linear-gradient(135deg, #A822DD 0%, #CC55EC 100%)',
+                      boxShadow: '0 8px 24px rgba(168,34,221,0.35)',
                     }}
                   >
                     Acessar Rulles IA

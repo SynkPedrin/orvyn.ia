@@ -37,15 +37,15 @@ export function Navbar() {
           width: isExpanded ? 'auto' : isScrolled ? 180 : 320,
           borderRadius: 50,
         }}
-        style={{ maxWidth: 'calc(100vw - 32px)' }}
-        transition={{ 
-          type: 'spring', 
-          stiffness: 400, 
+        transition={{
+          type: 'spring',
+          stiffness: 400,
           damping: 30,
           layout: { duration: 0.4 }
         }}
         className="relative overflow-hidden"
         style={{
+          maxWidth: 'calc(100vw - 32px)',
           background: 'rgba(26, 26, 46, 0.9)',
           backdropFilter: 'blur(20px) saturate(180%)',
           WebkitBackdropFilter: 'blur(20px) saturate(180%)',

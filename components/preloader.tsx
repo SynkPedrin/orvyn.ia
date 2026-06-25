@@ -62,7 +62,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
               alt="ORVYN"
               width={80}
               height={80}
-              style={{ filter: 'drop-shadow(0 0 32px rgba(83,74,183,0.8))' }}
+              style={{ filter: 'drop-shadow(0 0 32px rgba(168,34,221,0.8))' }}
               priority
             />
           </motion.div>
@@ -73,7 +73,7 @@ export function Preloader({ onComplete }: { onComplete: () => void }) {
               className="h-full rounded-full"
               style={{
                 width: `${progress}%`,
-                background: 'linear-gradient(90deg, #534AB7, #8B85E8)',
+                background: 'linear-gradient(90deg, #A822DD, #8B85E8)',
               }}
               transition={{ ease: 'easeOut' }}
             />

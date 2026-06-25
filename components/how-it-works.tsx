@@ -73,10 +73,10 @@ export function HowItWorks() {
           transition={{ duration: 0.6 }}
           className="flex items-center gap-4 mb-16"
         >
-          <div className="w-8 h-px" style={{ background: '#534AB7' }} />
+          <div className="w-8 h-px" style={{ background: '#A822DD' }} />
           <span
             className="text-[11px] font-semibold tracking-widest uppercase"
-            style={{ color: '#534AB7' }}
+            style={{ color: '#A822DD' }}
           >
             NOSSO PROCESSO
           </span>
@@ -99,7 +99,7 @@ export function HowItWorks() {
             ref={lineRef}
             className="h-px origin-left"
             style={{
-              background: 'linear-gradient(90deg, #534AB7, #7B74E0, transparent)',
+              background: 'linear-gradient(90deg, #A822DD, #CC55EC, transparent)',
             }}
           />
         </div>
@@ -117,7 +117,7 @@ export function HowItWorks() {
             >
               <span
                 className="font-display font-bold text-6xl sm:text-7xl block mb-6 leading-none"
-                style={{ color: 'rgba(83,74,183,0.18)' }}
+                style={{ color: 'rgba(168,34,221,0.18)' }}
               >
                 {step.number}
               </span>

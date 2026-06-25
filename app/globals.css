@@ -6,9 +6,9 @@
   --font-display: 'Oswald', system-ui, sans-serif;
   --purple-600: #9333ea;
   --purple-700: #7c3aed;
-  --brand: #534AB7;
-  --brand-light: #7B74E0;
-  --brand-glow: rgba(83,74,183,0.35);
+  --brand: #A822DD;
+  --brand-light: #CC55EC;
+  --brand-glow: rgba(168,34,221,0.35);
   --bg: #f5f3ee;
   --bg-surface: rgba(255,255,255,0.6);
   --border: rgba(26,26,46,0.09);
@@ -249,7 +249,7 @@
     backdrop-filter: blur(24px) saturate(180%);
     -webkit-backdrop-filter: blur(24px) saturate(180%);
     background: rgba(26,26,46,0.85);
-    border: 1px solid rgba(83,74,183,0.2);
+    border: 1px solid rgba(168,34,221,0.2);
     box-shadow: 0 8px 32px rgba(0,0,0,0.2);
   }
 
@@ -260,12 +260,12 @@
   }
 
   .card-dark:hover {
-    border-color: rgba(83,74,183,0.35);
-    box-shadow: 0 0 40px rgba(83,74,183,0.06);
+    border-color: rgba(168,34,221,0.35);
+    box-shadow: 0 0 40px rgba(168,34,221,0.06);
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, #A09EF5 0%, #534AB7 50%, #7B74E0 100%);
+    background: linear-gradient(135deg, #E088F8 0%, #A822DD 50%, #CC55EC 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -295,14 +295,14 @@
   }
   
   .btn-primary {
-    background: linear-gradient(135deg, #534AB7 0%, #7B74E0 100%);
+    background: linear-gradient(135deg, #A822DD 0%, #CC55EC 100%);
     color: white;
     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
   }
 
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 36px rgba(83,74,183,0.45);
+    box-shadow: 0 12px 36px rgba(168,34,221,0.45);
   }
 
   .noise-overlay {
@@ -334,12 +334,12 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #534AB7, #7B74E0);
+  background: linear-gradient(180deg, #A822DD, #CC55EC);
   border-radius: 4px;
 }
 
 ::selection {
-  background: rgba(83,74,183,0.2);
+  background: rgba(168,34,221,0.2);
   color: #1a1a2e;
 }
 

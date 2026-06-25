@@ -72,15 +72,15 @@ export function Hero() {
             alt="ORVYN"
             width={28}
             height={28}
-            style={{ filter: 'drop-shadow(0 0 12px rgba(83,74,183,0.7))' }}
+            style={{ filter: 'drop-shadow(0 0 12px rgba(168,34,221,0.7))' }}
           />
           <div
             className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-[11px] font-semibold tracking-widest uppercase"
-            style={{ border: '1px solid rgba(83,74,183,0.35)', color: '#A09EF5' }}
+            style={{ border: '1px solid rgba(168,34,221,0.35)', color: '#E088F8' }}
           >
             <span
               className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ background: '#534AB7' }}
+              style={{ background: '#A822DD' }}
             />
             ORVYN SISTEMAS — NOVA ERA 2026
           </div>
@@ -180,7 +180,7 @@ export function Hero() {
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
           className="w-px h-8"
-          style={{ background: 'linear-gradient(to bottom, rgba(83,74,183,0.6), transparent)' }}
+          style={{ background: 'linear-gradient(to bottom, rgba(168,34,221,0.6), transparent)' }}
         />
       </motion.div>
     </section>

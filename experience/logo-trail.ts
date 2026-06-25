@@ -35,9 +35,9 @@ export function createLogoTrail({ scene, camera, onTick }: Core) {
   glowCanvas.width = 128; glowCanvas.height = 128
   const gc = glowCanvas.getContext('2d')!
   const gr = gc.createRadialGradient(64, 64, 0, 64, 64, 64)
-  gr.addColorStop(0, 'rgba(160,158,245,0.8)')
-  gr.addColorStop(0.35, 'rgba(83,74,183,0.4)')
-  gr.addColorStop(1, 'rgba(83,74,183,0)')
+  gr.addColorStop(0, 'rgba(224,136,248,0.8)')
+  gr.addColorStop(0.35, 'rgba(168,34,221,0.4)')
+  gr.addColorStop(1, 'rgba(168,34,221,0)')
   gc.fillStyle = gr
   gc.fillRect(0, 0, 128, 128)
   glowMat.map = new THREE.CanvasTexture(glowCanvas)
@@ -57,9 +57,9 @@ export function createLogoTrail({ scene, camera, onTick }: Core) {
   trailCanvas.width = 32; trailCanvas.height = 32
   const tc = trailCanvas.getContext('2d')!
   const tg = tc.createRadialGradient(16, 16, 0, 16, 16, 16)
-  tg.addColorStop(0, 'rgba(160,158,245,1)')
-  tg.addColorStop(0.5, 'rgba(83,74,183,0.6)')
-  tg.addColorStop(1, 'rgba(83,74,183,0)')
+  tg.addColorStop(0, 'rgba(224,136,248,1)')
+  tg.addColorStop(0.5, 'rgba(168,34,221,0.6)')
+  tg.addColorStop(1, 'rgba(168,34,221,0)')
   tc.fillStyle = tg
   tc.fillRect(0, 0, 32, 32)
 

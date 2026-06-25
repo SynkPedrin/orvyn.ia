@@ -34,7 +34,7 @@ export function createGlassSphere({ scene, renderer, onTick, isMobile }: Core): 
   // ── Outer glass sphere ───────────────────────────────────────
   const sphereGeo = new THREE.SphereGeometry(1.5, isMobile ? 48 : 96, isMobile ? 48 : 96)
   const glassMat = new THREE.MeshPhysicalMaterial({
-    color: new THREE.Color(0xC8C4FF),
+    color: new THREE.Color(0xCC88F8),
     transmission: isMobile ? 0.82 : 0.96,
     roughness: 0.0,
     thickness: isMobile ? 1.5 : 3.0,
@@ -82,7 +82,7 @@ export function createGlassSphere({ scene, renderer, onTick, isMobile }: Core): 
   // ── Equatorial ring ──────────────────────────────────────────
   const ringGeo = new THREE.TorusGeometry(2.0, 0.012, 8, 120)
   const ringMat = new THREE.MeshBasicMaterial({
-    color: 0x9B92FF,
+    color: 0xCC88F8,
     transparent: true,
     opacity: 0.25,
   })
