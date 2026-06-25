@@ -4,12 +4,12 @@ import { ReactLenis, useLenis } from 'lenis/react'
 import { useEffect, type ReactNode } from 'react'
 
 function GSAPSync() {
+  // Sync Lenis scroll ticks → ScrollTrigger on every frame
   useLenis(() => {
-    if (typeof window !== 'undefined') {
-      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
-        ScrollTrigger.update()
-      })
-    }
+    if (typeof window === 'undefined') return
+    import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+      ScrollTrigger.update()
+    })
   })
 
   useEffect(() => {
@@ -17,6 +17,8 @@ function GSAPSync() {
     import('gsap').then(({ gsap }) => {
       import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
         gsap.registerPlugin(ScrollTrigger)
+        // Disable lag smoothing so scrub feels tight
+        gsap.ticker.lagSmoothing(0)
         ScrollTrigger.refresh()
       })
     })
@@ -33,9 +35,10 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
         lerp: 0.1,
         duration: 1.4,
         smoothWheel: true,
-        wheelMultiplier: 0.8,
-        touchMultiplier: 1.5,
+        wheelMultiplier: 0.85,
+        touchMultiplier: 1.6,
         infinite: false,
+        autoResize: true,
       }}
     >
       <GSAPSync />
