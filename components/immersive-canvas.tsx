@@ -145,7 +145,7 @@ export function ImmersiveCanvas() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="fixed inset-0 select-none overflow-hidden"
-            style={{ zIndex: 10000, background: '#07060f' }}
+            style={{ zIndex: 10000, background: 'transparent' }}
           >
             {/* NAV strip */}
             <div

@@ -25,9 +25,9 @@ export async function mountExperience(
     if (disposed) return
     sphere.hide()
     shatter.explode(() => {
-      // After shards settle, logo trail takes over
-      const off = logoTrail.activate(scrollCam.getProgress)
-      // Cleanup trail disposer when experience disposes
+      // Canvas becomes transparent so the off-white LP shows through
+      core.scene.background = null
+      logoTrail.activate(scrollCam.getProgress)
     })
   }
 

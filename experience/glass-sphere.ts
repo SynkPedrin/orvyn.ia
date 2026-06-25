@@ -9,6 +9,9 @@ export interface GlassSphereSystem {
 }
 
 export function createGlassSphere({ scene, renderer, onTick, isMobile }: Core): GlassSphereSystem {
+  // Dark background so canvas is self-contained during start screen
+  scene.background = new THREE.Color(0x07060f)
+
   // Shared env map for glass reflections
   const pmrem = new THREE.PMREMGenerator(renderer)
   pmrem.compileEquirectangularShader()
