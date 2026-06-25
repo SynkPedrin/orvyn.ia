@@ -124,12 +124,24 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: #07060f; /* dark bg visible behind the 3D canvas */
   }
 
   body {
-    background-color: #f5f3ee;
+    background-color: transparent;
     color: #1a1a2e;
     font-family: var(--font-sans);
+  }
+
+  /* Sections are semi-transparent so the 3D canvas bleeds through — Noomo-style */
+  main, section {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Off-white tint that lets the 3D show subtly */
+  .page-bg {
+    background-color: rgba(245,243,238,0.88);
   }
 
   h1, h2, h3, h4, h5, h6 {

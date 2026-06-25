@@ -13,7 +13,7 @@ import { BackgroundAnimation } from '@/components/background-animation'
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen overflow-x-hidden">
+    <main className="min-h-screen overflow-x-hidden page-bg">
       <BackgroundAnimation />
       <Navbar />
       <Hero />

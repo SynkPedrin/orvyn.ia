@@ -1,8 +1,8 @@
 // Orchestrator — lazy-loaded, never runs on the server
 import { createCore } from './core'
-import { createCrystal } from './crystal'
-import { createParticles } from './particles'
+import { createGlassSphere } from './glass-sphere'
 import { createShatter } from './shatter'
+import { createLogoTrail } from './logo-trail'
 import { setupScrollCamera } from './scroll-camera'
 
 export interface ExperienceHandle {
@@ -14,24 +14,28 @@ export async function mountExperience(
   canvas: HTMLCanvasElement
 ): Promise<ExperienceHandle> {
   const core = createCore(canvas)
-  const crystal = createCrystal(core)
-  const particles = createParticles(core)
-  const shatter = createShatter(core)
+  const sphere   = createGlassSphere(core)
+  const shatter  = createShatter(core)
+  const logoTrail = createLogoTrail(core)
   const scrollCam = setupScrollCamera(core)
 
-  let shattered = false
+  let disposed = false
 
   function triggerShatter() {
-    if (shattered) return
-    shattered = true
-    crystal.hide()
-    shatter.explode()
+    if (disposed) return
+    sphere.hide()
+    shatter.explode(() => {
+      // After shards settle, logo trail takes over
+      const off = logoTrail.activate(scrollCam.getProgress)
+      // Cleanup trail disposer when experience disposes
+    })
   }
 
   function dispose() {
-    crystal.dispose()
-    particles.dispose()
+    disposed = true
+    sphere.dispose()
     shatter.dispose()
+    logoTrail.dispose()
     scrollCam.dispose()
     core.dispose()
   }
