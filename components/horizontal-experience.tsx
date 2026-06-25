@@ -25,16 +25,16 @@ const C = {
 
 // ── data ───────────────────────────────────────────────────────────────────────
 const pillars = [
-  { n:'01', Icon:TrendingUp,      t:'Gestão de Tráfego',       d:'Atraia clientes qualificados todos os dias através de campanhas estratégicas otimizadas.' },
-  { n:'02', Icon:Bot,             t:'IA para Atendimento',      d:'Automatize atendimentos 24h. Nossa IA qualifica leads e conduz clientes pelo funil.' },
-  { n:'03', Icon:LayoutDashboard, t:'Sistema de Gestão',        d:'Centralize toda a operação da empresa em uma plataforma feita para sua realidade.' },
-  { n:'04', Icon:Globe,           t:'Landing Page & Dev',       d:'Páginas de alta conversão e sistemas sob medida. Do design ao código, premium.' },
+  { n:'01', Icon:TrendingUp,      t:'Gestão de Tráfego',   d:'Atraia clientes qualificados todos os dias através de campanhas estratégicas otimizadas.' },
+  { n:'02', Icon:Bot,             t:'IA para Atendimento',  d:'Automatize atendimentos 24h. Nossa IA qualifica leads e conduz clientes pelo funil.' },
+  { n:'03', Icon:LayoutDashboard, t:'Sistema de Gestão',    d:'Centralize toda a operação da empresa em uma plataforma feita para sua realidade.' },
+  { n:'04', Icon:Globe,           t:'Landing Page & Dev',   d:'Páginas de alta conversão e sistemas sob medida. Do design ao código, premium.' },
 ]
 const steps = [
-  { n:'01', t:'Diagnóstico',    d:'Mapeamos processos, identificamos gargalos e definimos onde a IA gera mais impacto.' },
-  { n:'02', t:'Arquitetura',    d:'Desenhamos o fluxo técnico: integrações, triggers, modelos e estrutura de dados.' },
-  { n:'03', t:'Implementação',  d:'Construímos e testamos automações, bots, CRM e criativos em cada componente.' },
-  { n:'04', t:'Escala',         d:'Monitoramos, otimizamos e expandimos. O sistema evolui com o seu negócio.' },
+  { n:'01', t:'Diagnóstico',   d:'Mapeamos processos, identificamos gargalos e definimos onde a IA gera mais impacto.' },
+  { n:'02', t:'Arquitetura',   d:'Desenhamos o fluxo técnico: integrações, triggers, modelos e estrutura de dados.' },
+  { n:'03', t:'Implementação', d:'Construímos e testamos automações, bots, CRM e criativos em cada componente.' },
+  { n:'04', t:'Escala',        d:'Monitoramos, otimizamos e expandimos. O sistema evolui com o seu negócio.' },
 ]
 const diffs = [
   { n:'01', Icon:Crosshair,   t:'Nichado, não genérico',          d:'Cada solução é construída para o problema específico do seu negócio.' },
@@ -47,62 +47,74 @@ const testimonials = [
   { name:'Felipe Oliveira', role:'CTO, Tech Startup',                        text:'A Orvyn não vende software, vende entendimento. Entendem o problema antes do código.' },
 ]
 
-// ── gem positions per slide ────────────────────────────────────────────────────
-// each slide's content is laid out around the gem's position
-const GEM = [
-  { l:'7vw',  t:'78vh', s:0.75 },  // 0 intro:         bottom-left corner
-  { l:'88vw', t:'11vh', s:0.50 },  // 1 pillars:       top-right
-  { l:'39vw', t:'50vh', s:0.90 },  // 2 products:      center between image+text
-  { l:'7vw',  t:'11vh', s:0.50 },  // 3 process:       top-left
-  { l:'88vw', t:'78vh', s:0.65 },  // 4 why:           bottom-right
-  { l:'50vw', t:'7vh',  s:0.50 },  // 5 testimonials:  top-center
-  { l:'50vw', t:'28vh', s:1.10 },  // 6 cta:           center hero
-]
+// ── gem positions: [desktop, mobile] ──────────────────────────────────────────
+const GEM = {
+  desktop: [
+    { l:'7vw',  t:'78vh', s:0.75 },
+    { l:'88vw', t:'11vh', s:0.50 },
+    { l:'39vw', t:'50vh', s:0.90 },
+    { l:'7vw',  t:'11vh', s:0.50 },
+    { l:'88vw', t:'78vh', s:0.65 },
+    { l:'50vw', t:'7vh',  s:0.50 },
+    { l:'50vw', t:'28vh', s:1.10 },
+  ],
+  mobile: [
+    { l:'7vw',  t:'80vh', s:0.55 },
+    { l:'85vw', t:'9vh',  s:0.40 },
+    { l:'85vw', t:'48vh', s:0.60 },
+    { l:'7vw',  t:'9vh',  s:0.38 },
+    { l:'85vw', t:'80vh', s:0.48 },
+    { l:'50vw', t:'6vh',  s:0.38 },
+    { l:'50vw', t:'25vh', s:0.85 },
+  ],
+}
 
-// ── Framer Motion content variants ────────────────────────────────────────────
-function useSlideVariants(active: boolean) {
+// ── clip-path direction: odd = from right, even = from below ──────────────────
+const clipFrom = (i: number) => i % 2 !== 0 ? 'inset(0 0 0 100%)' : 'inset(100% 0 0 0)'
+
+// ── Framer Motion stagger variants ────────────────────────────────────────────
+function useV(active: boolean) {
   return {
-    container: {
+    wrap: {
       animate: active ? 'show' : 'hide',
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       variants: {
-        hide: { transition: { staggerChildren: 0.04, staggerDirection: -1 as any } },
-        show: { transition: { staggerChildren: 0.07, delayChildren: 0.12 } },
-      } as any,
+        hide: { transition: { staggerChildren: 0.03, staggerDirection: -1 as never } },
+        show: { transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
+      } as never,
     },
-    item: {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    el: {
       variants: {
-        hide: { opacity: 0, y: 14, transition: { duration: 0.28 } },
-        show: { opacity: 1, y: 0,  transition: { duration: 0.52, ease: [0.16, 1, 0.3, 1] } },
-      } as any,
+        hide: { opacity: 0, y: 12, transition: { duration: 0.25 } },
+        show: { opacity: 1, y: 0,  transition: { duration: 0.55, ease: [0.16, 1, 0.3, 1] } },
+      } as never,
     },
   }
 }
 
-// ── helpers ────────────────────────────────────────────────────────────────────
-function Label({ children, light = false }: { children: string; light?: boolean }) {
+// ── label ──────────────────────────────────────────────────────────────────────
+function Label({ t, light }: { t: string; light?: boolean }) {
   return (
     <div className="flex items-center gap-3">
       <div className="w-5 h-px" style={{ background: light ? C.brandHi : C.brand }} />
       <span className="text-[10px] font-semibold tracking-widest uppercase"
-        style={{ color: light ? C.brandHi : C.brand }}>{children}</span>
+        style={{ color: light ? C.brandHi : C.brand }}>{t}</span>
     </div>
   )
 }
 
 // ── SLIDE 0 — Intro ────────────────────────────────────────────────────────────
-function Slide0({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S0({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.dark }}>
       <div className="absolute inset-0 pointer-events-none"
         style={{ background:`radial-gradient(ellipse 70% 55% at 50% 50%, ${C.g(.07)} 0%, transparent 72%)` }} />
-      <div className="relative z-10 h-full flex flex-col justify-center px-10 xl:px-20 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-          {/* left: headline + CTA */}
-          <motion.div {...v.container}>
-            <motion.div {...v.item} className="flex items-center gap-3 mb-8">
+      <div className="relative z-10 h-full flex flex-col justify-center px-6 sm:px-10 xl:px-20 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-14 items-center">
+
+          {/* heading + CTAs */}
+          <motion.div {...v.wrap}>
+            <motion.div {...v.el} className="flex items-center gap-3 mb-5 sm:mb-8">
               <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full"
                 style={{ border:`1px solid ${C.g(.3)}`, fontSize:10, fontWeight:600, letterSpacing:'.14em', textTransform:'uppercase', color:C.brandHi }}>
                 <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background:C.brand }} />
@@ -115,42 +127,42 @@ function Slide0({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
               { t:'Estratégia que',   accent:false },
               { t:'converte.',        accent:true  },
             ].map(({ t, accent }) => (
-              <motion.div key={t} {...v.item} className="overflow-hidden">
+              <motion.div key={t} {...v.el} className="overflow-hidden">
                 <span className={`font-display font-bold block leading-[.93]${accent?' text-gradient':''}`}
-                  style={{ fontSize:'clamp(2.4rem,4.5vw,5.2rem)', color:accent?undefined:C.white }}>{t}</span>
+                  style={{ fontSize:'clamp(2rem,7vw,5.2rem)', color:accent?undefined:C.white }}>{t}</span>
               </motion.div>
             ))}
-            <motion.div {...v.item} className="flex flex-col sm:flex-row gap-3 mt-10">
-              <Link href="#" className="btn-primary inline-flex items-center gap-3 px-7 py-4 rounded-xl font-semibold text-base text-white">
-                Ver Produtos <ArrowRight className="w-5 h-5" />
+            <motion.div {...v.el} className="flex flex-col sm:flex-row gap-3 mt-7 sm:mt-10">
+              <Link href="#" className="btn-primary inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-semibold text-sm sm:text-base text-white">
+                Ver Produtos <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
               <Link href="mailto:orvynsistemas@outlook.com"
-                className="inline-flex items-center gap-3 px-7 py-4 rounded-xl font-semibold text-base"
+                className="inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-semibold text-sm sm:text-base"
                 style={{ border:`1px solid rgba(255,255,255,.1)`, color:C.white, background:'rgba(255,255,255,.04)' }}>
                 Falar com Especialista
               </Link>
             </motion.div>
           </motion.div>
 
-          {/* right: metric tiles */}
-          <motion.div {...v.container} className="grid grid-cols-2 gap-5">
+          {/* metrics */}
+          <motion.div {...v.wrap} className="grid grid-cols-2 gap-3 sm:gap-5">
             {[{ v:'+40',label:'Clientes Ativos' },{ v:'98%',label:'Retenção' },{ v:'3',label:'Produtos SaaS' },{ v:'5+',label:'Anos de Mercado' }].map(({ v:val, label }) => (
-              <motion.div key={label} {...v.item} className="rounded-2xl p-6"
+              <motion.div key={label} {...v.el} className="rounded-2xl p-4 sm:p-6"
                 style={{ background:'rgba(255,255,255,.04)', border:`1px solid ${C.g(.11)}` }}>
-                <div className="font-display font-bold text-4xl mb-1 leading-none" style={{ color:C.white }}>{val}</div>
-                <div className="text-xs tracking-widest uppercase" style={{ color:'rgba(255,255,255,.35)' }}>{label}</div>
+                <div className="font-display font-bold text-3xl sm:text-4xl mb-1 leading-none" style={{ color:C.white }}>{val}</div>
+                <div className="text-[10px] sm:text-xs tracking-widest uppercase" style={{ color:'rgba(255,255,255,.35)' }}>{label}</div>
               </motion.div>
             ))}
           </motion.div>
         </div>
       </div>
-      {/* scroll hint */}
-      <motion.div className="absolute bottom-7 right-10 xl:right-20 flex items-center gap-1.5"
-        style={{ color:'rgba(255,255,255,.22)' }}
-        animate={{ opacity: active ? 1 : 0 }} transition={{ duration:.4, delay:.6 }}>
-        <motion.div animate={{ x:[0,12,0] }} transition={{ duration:1.6, repeat:Infinity }}>
+
+      <motion.div className="absolute bottom-6 right-6 sm:bottom-7 sm:right-10 xl:right-20 flex items-center gap-1.5"
+        animate={{ opacity: active ? 1 : 0 }} transition={{ duration:.4, delay:.6 }}
+        style={{ color:'rgba(255,255,255,.22)' }}>
+        <motion.div animate={{ x:[0,10,0] }} transition={{ duration:1.6, repeat:Infinity }}>
           <div className="flex items-center gap-1.5">
-            <span style={{ fontSize:10, letterSpacing:'.14em', textTransform:'uppercase' }}>scroll</span>
+            <span style={{ fontSize:9, letterSpacing:'.14em', textTransform:'uppercase' }}>scroll</span>
             <ChevronRight className="w-3 h-3" />
           </div>
         </motion.div>
@@ -160,30 +172,30 @@ function Slide0({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── SLIDE 1 — Pillars ──────────────────────────────────────────────────────────
-function Slide1({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S1({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.light }}>
-      <div className="h-full flex flex-col justify-center px-10 xl:px-20 py-14 max-w-7xl mx-auto w-full">
-        <motion.div {...v.container}>
-          <motion.div {...v.item} className="mb-10">
-            <Label>SOLUÇÃO COMPLETA</Label>
-            <h2 className="font-display font-bold mt-4 leading-[.93]"
-              style={{ fontSize:'clamp(2rem,3.8vw,4.2rem)', color:C.text }}>
+      <div className="h-full overflow-y-auto flex flex-col justify-center px-6 sm:px-10 xl:px-20 py-8 sm:py-14 max-w-7xl mx-auto w-full">
+        <motion.div {...v.wrap}>
+          <motion.div {...v.el} className="mb-6 sm:mb-10">
+            <Label t="SOLUÇÃO COMPLETA" />
+            <h2 className="font-display font-bold mt-3 leading-[.93]"
+              style={{ fontSize:'clamp(1.75rem,5vw,4.2rem)', color:C.text }}>
               Tecnologia, automação e{' '}
               <span className="text-gradient">inteligência estratégica.</span>
             </h2>
           </motion.div>
-          <div className="grid grid-cols-2 gap-4" style={{ perspective:'1400px' }}>
-            {pillars.map((p, i) => (
-              <motion.div key={p.n} {...v.item} className="rounded-2xl p-6 cursor-default"
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4" style={{ perspective:'1400px' }}>
+            {pillars.map((p) => (
+              <motion.div key={p.n} {...v.el} className="rounded-2xl p-4 sm:p-6 cursor-default"
                 style={{ background:'rgba(255,255,255,.74)', border:'1px solid rgba(26,26,46,.09)' }}>
-                <span className="font-display font-bold text-4xl block mb-4 leading-none" style={{ color:C.g(.1) }}>{p.n}</span>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4"
+                <span className="font-display font-bold text-3xl sm:text-4xl block mb-3 leading-none" style={{ color:C.g(.1) }}>{p.n}</span>
+                <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center mb-3"
                   style={{ background:C.g(.09), border:`1px solid ${C.g(.22)}` }}>
-                  <p.Icon className="w-5 h-5" style={{ color:C.brand }} />
+                  <p.Icon className="w-4 h-4 sm:w-5 sm:h-5" style={{ color:C.brand }} />
                 </div>
-                <h3 className="font-display text-base font-bold mb-2 leading-tight" style={{ color:C.text }}>{p.t}</h3>
+                <h3 className="font-display text-sm sm:text-base font-bold mb-1.5 leading-tight" style={{ color:C.text }}>{p.t}</h3>
                 <p className="text-xs leading-relaxed" style={{ color:C.muted }}>{p.d}</p>
               </motion.div>
             ))}
@@ -195,31 +207,35 @@ function Slide1({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── SLIDE 2 — Products ─────────────────────────────────────────────────────────
-function Slide2({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S2({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.light }}>
-      <div className="h-full flex items-center px-10 xl:px-20 max-w-7xl mx-auto w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 w-full items-center">
-          <motion.div {...v.item} className="rounded-2xl overflow-hidden"
+      <div className="h-full overflow-y-auto flex items-center px-6 sm:px-10 xl:px-20 py-8 max-w-7xl mx-auto w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 w-full items-center">
+
+          {/* screenshot — hidden on smallest mobile to avoid overflow */}
+          <motion.div {...v.el} className="hidden sm:block rounded-2xl overflow-hidden flex-shrink-0"
             style={{ transform:'perspective(1200px) rotateY(-7deg) rotateX(2.5deg)', boxShadow:`0 30px 80px ${C.g(.2)}` }}>
             <Image src="/images/rulles-ia.png" alt="Rulles IA" width={800} height={500} className="w-full h-auto block" />
           </motion.div>
-          <motion.div {...v.container}>
-            <motion.div {...v.item} className="mb-4"><Label>NOSSOS PRODUTOS</Label></motion.div>
-            <motion.div {...v.item} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-4"
+
+          {/* text */}
+          <motion.div {...v.wrap}>
+            <motion.div {...v.el} className="mb-3"><Label t="NOSSOS PRODUTOS" /></motion.div>
+            <motion.div {...v.el} className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium mb-3"
               style={{ background:C.g(.13), color:C.brandHi, border:`1px solid ${C.g(.28)}` }}>
               CRM — ADVOCACIA &amp; GESTÃO JURÍDICA
             </motion.div>
-            <motion.h3 {...v.item} className="font-display font-normal mb-2 leading-[.93]"
-              style={{ fontSize:'clamp(2.5rem,4vw,4.5rem)', color:C.text }}>Rulles IA</motion.h3>
-            <motion.p {...v.item} className="text-base font-medium mb-3" style={{ color:C.brandLt }}>
+            <motion.h3 {...v.el} className="font-display font-normal mb-2 leading-[.93]"
+              style={{ fontSize:'clamp(2rem,5vw,4.5rem)', color:C.text }}>Rulles IA</motion.h3>
+            <motion.p {...v.el} className="text-sm sm:text-base font-medium mb-2" style={{ color:C.brandLt }}>
               O CRM com IA nichado para advogados.
             </motion.p>
-            <motion.p {...v.item} className="text-sm leading-relaxed mb-6" style={{ color:C.muted }}>
+            <motion.p {...v.el} className="text-sm leading-relaxed mb-4" style={{ color:C.muted }}>
               Plataforma de gestão jurídica potencializada por IA. Automatize atendimento, organize processos e converta leads com precisão.
             </motion.p>
-            <motion.div {...v.item} className="space-y-2 mb-7">
+            <motion.div {...v.el} className="space-y-2 mb-5 hidden sm:block">
               {[
                 { I:Scale,    t:'Triagem automática via IA conversacional' },
                 { I:FileText, t:'Geração assistida de documentos jurídicos' },
@@ -232,9 +248,9 @@ function Slide2({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
                 </div>
               ))}
             </motion.div>
-            <motion.div {...v.item}>
+            <motion.div {...v.el}>
               <Link href="https://rulles-ia-pn5f.vercel.app/" target="_blank" rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-xl font-medium text-white text-sm"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl font-medium text-white text-sm"
                 style={{ background:`linear-gradient(135deg,${C.brand},${C.brandLt})`, boxShadow:`0 8px 24px ${C.g(.3)}` }}>
                 Acessar Rulles IA <ArrowRight className="w-4 h-4" />
               </Link>
@@ -247,30 +263,31 @@ function Slide2({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── SLIDE 3 — Process ──────────────────────────────────────────────────────────
-function Slide3({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S3({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.dark }}>
       <div className="absolute inset-0 pointer-events-none"
         style={{ background:`radial-gradient(ellipse 65% 45% at 50% 65%, ${C.g(.06)} 0%, transparent 72%)` }} />
-      <div className="relative z-10 h-full flex flex-col justify-center px-10 xl:px-20 max-w-7xl mx-auto w-full">
-        <motion.div {...v.container}>
-          <motion.div {...v.item} className="mb-12">
-            <Label light>NOSSO PROCESSO</Label>
-            <h2 className="font-display font-bold mt-4 leading-[.93]"
-              style={{ fontSize:'clamp(2rem,3.8vw,4.2rem)', color:C.white }}>
+      <div className="relative z-10 h-full overflow-y-auto flex flex-col justify-center px-6 sm:px-10 xl:px-20 py-8 max-w-7xl mx-auto w-full">
+        <motion.div {...v.wrap}>
+          <motion.div {...v.el} className="mb-7 sm:mb-12">
+            <Label t="NOSSO PROCESSO" light />
+            <h2 className="font-display font-bold mt-3 leading-[.93]"
+              style={{ fontSize:'clamp(1.75rem,5vw,4.2rem)', color:C.white }}>
               Do problema ao resultado.{' '}
               <span className="text-gradient">Em etapas claras.</span>
             </h2>
           </motion.div>
-          <div className="grid grid-cols-4 gap-0">
+          {/* 2 cols on mobile, 4 on desktop */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-0">
             {steps.map((s) => (
-              <motion.div key={s.n} {...v.item} className="pt-7 pr-8"
+              <motion.div key={s.n} {...v.el} className="pt-5 sm:pt-7 pr-4 sm:pr-8 pb-4"
                 style={{ borderTop:`1px solid ${C.g(.2)}` }}>
-                <span className="font-display font-bold block mb-4 leading-none"
-                  style={{ fontSize:'4.2rem', color:C.g(.16) }}>{s.n}</span>
-                <h3 className="font-display text-xl mb-3" style={{ color:C.white }}>{s.t}</h3>
-                <p className="text-sm leading-relaxed" style={{ color:'rgba(255,255,255,.38)' }}>{s.d}</p>
+                <span className="font-display font-bold block mb-3 leading-none"
+                  style={{ fontSize:'clamp(2.5rem,6vw,4.2rem)', color:C.g(.16) }}>{s.n}</span>
+                <h3 className="font-display text-base sm:text-xl mb-2" style={{ color:C.white }}>{s.t}</h3>
+                <p className="text-xs sm:text-sm leading-relaxed" style={{ color:'rgba(255,255,255,.38)' }}>{s.d}</p>
               </motion.div>
             ))}
           </div>
@@ -281,33 +298,34 @@ function Slide3({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── SLIDE 4 — Why ──────────────────────────────────────────────────────────────
-function Slide4({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S4({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.light }}>
-      <div className="h-full flex flex-col justify-center px-10 xl:px-20 max-w-7xl mx-auto w-full">
-        <motion.div {...v.container}>
-          <motion.div {...v.item} className="mb-10">
-            <Label>DIFERENCIAIS</Label>
-            <h2 className="font-display font-bold mt-4 leading-[.93]"
-              style={{ fontSize:'clamp(2rem,3.8vw,4.2rem)', color:C.text }}>Por que Orvyn</h2>
-            <p className="text-base mt-3" style={{ color:C.muted }}>Três razões técnicas que definem nossa abordagem.</p>
+      <div className="h-full overflow-y-auto flex flex-col justify-center px-6 sm:px-10 xl:px-20 py-8 sm:py-0 max-w-7xl mx-auto w-full">
+        <motion.div {...v.wrap}>
+          <motion.div {...v.el} className="mb-6 sm:mb-10">
+            <Label t="DIFERENCIAIS" />
+            <h2 className="font-display font-bold mt-3 leading-[.93]"
+              style={{ fontSize:'clamp(1.75rem,5vw,4.2rem)', color:C.text }}>Por que Orvyn</h2>
+            <p className="text-sm sm:text-base mt-2" style={{ color:C.muted }}>Três razões técnicas que definem nossa abordagem.</p>
           </motion.div>
-          <div className="grid grid-cols-3 gap-5" style={{ perspective:'1400px' }}>
+          {/* stacked on mobile, 3 cols on sm+ */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
             {diffs.map((d, i) => (
-              <motion.div key={d.n} {...v.item} className="rounded-2xl p-8 cursor-default"
+              <motion.div key={d.n} {...v.el} className="rounded-2xl p-5 sm:p-8 cursor-default"
                 style={{
                   background:'rgba(255,255,255,.72)', border:'1px solid rgba(26,26,46,.08)',
                   transform:`perspective(900px) rotateY(${(i-1)*-4}deg) rotateX(2deg)`,
                   transformOrigin:'center bottom',
                 }}>
-                <span className="font-display font-bold text-5xl block mb-4 leading-none" style={{ color:C.g(.12) }}>{d.n}</span>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                <span className="font-display font-bold text-4xl sm:text-5xl block mb-3 leading-none" style={{ color:C.g(.12) }}>{d.n}</span>
+                <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-xl flex items-center justify-center mb-3 sm:mb-5"
                   style={{ background:C.g(.1), border:`1px solid ${C.g(.22)}` }}>
-                  <d.Icon className="w-6 h-6" style={{ color:C.brandLt }} />
+                  <d.Icon className="w-5 h-5 sm:w-6 sm:h-6" style={{ color:C.brandLt }} />
                 </div>
-                <h3 className="font-display text-xl mb-3" style={{ color:C.text }}>{d.t}</h3>
-                <p className="text-sm leading-relaxed" style={{ color:C.muted }}>{d.d}</p>
+                <h3 className="font-display text-base sm:text-xl mb-2" style={{ color:C.text }}>{d.t}</h3>
+                <p className="text-xs sm:text-sm leading-relaxed" style={{ color:C.muted }}>{d.d}</p>
               </motion.div>
             ))}
           </div>
@@ -318,35 +336,33 @@ function Slide4({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── SLIDE 5 — Testimonials ─────────────────────────────────────────────────────
-function Slide5({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S5({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.light }}>
-      <div className="h-full flex flex-col justify-center px-10 xl:px-20 max-w-7xl mx-auto w-full">
-        <motion.div {...v.container}>
-          <motion.div {...v.item} className="mb-10">
-            <Label>DEPOIMENTOS</Label>
-            <h2 className="font-display font-bold mt-4 leading-[.93]"
-              style={{ fontSize:'clamp(2rem,3.8vw,4.2rem)', color:C.text }}>O que nossos clientes dizem</h2>
+      <div className="h-full overflow-y-auto flex flex-col justify-center px-6 sm:px-10 xl:px-20 py-8 sm:py-0 max-w-7xl mx-auto w-full">
+        <motion.div {...v.wrap}>
+          <motion.div {...v.el} className="mb-6 sm:mb-10">
+            <Label t="DEPOIMENTOS" />
+            <h2 className="font-display font-bold mt-3 leading-[.93]"
+              style={{ fontSize:'clamp(1.75rem,5vw,4.2rem)', color:C.text }}>O que nossos clientes dizem</h2>
           </motion.div>
-          <div className="grid grid-cols-3 gap-5" style={{ perspective:'1400px' }}>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
             {testimonials.map((t, i) => {
-              const initials = t.name.split(' ').map(n => n[0]).join('')
+              const ini = t.name.split(' ').map(n => n[0]).join('')
               return (
-                <motion.div key={t.name} {...v.item} className="rounded-2xl p-7"
+                <motion.div key={t.name} {...v.el} className="rounded-2xl p-5 sm:p-7"
                   style={{
                     background:'rgba(255,255,255,.72)', border:'1px solid rgba(26,26,46,.08)',
                     transform:`perspective(1000px) rotateY(${(i-1)*-4}deg) translateZ(${i===1?28:0}px)`,
                   }}>
-                  <div className="flex gap-1 mb-5">
-                    {[...Array(5)].map((_,s) => <Star key={s} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />)}
+                  <div className="flex gap-1 mb-3 sm:mb-5">
+                    {[...Array(5)].map((_,s) => <Star key={s} className="w-3 h-3 sm:w-3.5 sm:h-3.5 fill-yellow-400 text-yellow-400" />)}
                   </div>
-                  <p className="text-sm leading-relaxed mb-5" style={{ color:'rgba(26,26,46,.72)' }}>&ldquo;{t.text}&rdquo;</p>
+                  <p className="text-xs sm:text-sm leading-relaxed mb-4" style={{ color:'rgba(26,26,46,.72)' }}>&ldquo;{t.text}&rdquo;</p>
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center text-white font-semibold text-xs flex-shrink-0"
-                      style={{ background:`linear-gradient(135deg,${C.brand},${C.brandLt})` }}>
-                      {initials}
-                    </div>
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-white font-semibold text-xs flex-shrink-0"
+                      style={{ background:`linear-gradient(135deg,${C.brand},${C.brandLt})` }}>{ini}</div>
                     <div>
                       <div className="font-semibold text-xs" style={{ color:C.text }}>{t.name}</div>
                       <div className="text-[10px]" style={{ color:'rgba(26,26,46,.4)' }}>{t.role}</div>
@@ -363,55 +379,53 @@ function Slide5({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── SLIDE 6 — CTA ──────────────────────────────────────────────────────────────
-function Slide6({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolean }) {
-  const v = useSlideVariants(active)
+function S6({ r, active }: { r:(e:HTMLDivElement|null)=>void; active:boolean }) {
+  const v = useV(active)
   return (
     <div ref={r} className="absolute inset-0 overflow-hidden" style={{ background:C.dark }}>
       <div className="absolute inset-0 pointer-events-none"
         style={{ background:`radial-gradient(ellipse 80% 55% at 50% 50%, ${C.g(.09)} 0%, transparent 70%)` }} />
-      <div className="relative z-10 h-full flex flex-col justify-center px-10 xl:px-20 max-w-7xl mx-auto w-full">
-        <motion.div {...v.container}>
-          <motion.div {...v.item} className="mb-7"><Label light>VAMOS COMEÇAR</Label></motion.div>
-          {/* gem lives here as spacer — the floating gem is above */}
-          <div style={{ height:'8vh' }} />
+      <div className="relative z-10 h-full overflow-y-auto flex flex-col justify-center px-6 sm:px-10 xl:px-20 py-8 max-w-7xl mx-auto w-full">
+        <motion.div {...v.wrap}>
+          <motion.div {...v.el} className="mb-5 sm:mb-7"><Label t="VAMOS COMEÇAR" light /></motion.div>
+          {/* spacer for gem */}
+          <div style={{ height:'clamp(48px,8vh,80px)' }} />
           <div className="overflow-hidden mb-1">
-            <motion.h2 {...v.item} className="font-display font-bold leading-[.93]"
-              style={{ fontSize:'clamp(2.8rem,6.5vw,7rem)', color:C.white }}>
+            <motion.h2 {...v.el} className="font-display font-bold leading-[.93]"
+              style={{ fontSize:'clamp(2.2rem,7vw,7rem)', color:C.white }}>
               Pronto para automatizar
             </motion.h2>
           </div>
-          <div className="overflow-hidden mb-9">
-            <motion.h2 {...v.item} className="font-display font-bold leading-[.93] text-gradient"
-              style={{ fontSize:'clamp(2.8rem,6.5vw,7rem)' }}>
+          <div className="overflow-hidden mb-7 sm:mb-9">
+            <motion.h2 {...v.el} className="font-display font-bold leading-[.93] text-gradient"
+              style={{ fontSize:'clamp(2.2rem,7vw,7rem)' }}>
               o que te trava?
             </motion.h2>
           </div>
-          <motion.div {...v.item} className="flex flex-col sm:flex-row items-start gap-6">
-            <p className="text-sm max-w-xs leading-relaxed" style={{ color:'rgba(242,240,252,.4)' }}>
+          <motion.div {...v.el} className="flex flex-col sm:flex-row items-start gap-4 sm:gap-6">
+            <p className="text-sm max-w-xs leading-relaxed hidden sm:block" style={{ color:'rgba(242,240,252,.4)' }}>
               Fale com a ORVYN. Diagnóstico gratuito para novos projetos.
             </p>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
               <Link href="mailto:orvynsistemas@outlook.com?subject=Quero%20falar%20com%20a%20ORVYN"
-                className="btn-primary inline-flex items-center gap-3 px-7 py-4 rounded-xl font-semibold text-base text-white">
-                Falar com a Equipe <ArrowRight className="w-5 h-5" />
+                className="btn-primary inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-semibold text-sm sm:text-base text-white">
+                Falar com a Equipe <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5" />
               </Link>
               <Link href="mailto:orvynsistemas@outlook.com"
-                className="inline-flex items-center gap-3 px-7 py-4 rounded-xl font-semibold text-base"
+                className="inline-flex items-center justify-center gap-3 px-6 py-3.5 sm:px-7 sm:py-4 rounded-xl font-semibold text-sm sm:text-base"
                 style={{ border:'1px solid rgba(255,255,255,.1)', color:C.white, background:'rgba(255,255,255,.04)' }}>
                 Ver Produtos
               </Link>
             </div>
           </motion.div>
-          <motion.div {...v.item} className="mt-12 pt-7 flex items-center justify-between"
+          <motion.div {...v.el} className="mt-8 sm:mt-12 pt-5 sm:pt-7 flex items-center justify-between"
             style={{ borderTop:'1px solid rgba(255,255,255,.06)' }}>
-            <div className="flex items-center gap-3">
-              <Image src="/images/orvyn-gem.png" alt="ORVYN" width={26} height={26} />
-              <span className="font-display font-semibold text-base tracking-widest" style={{ color:C.white }}>ORVYN</span>
+            <div className="flex items-center gap-2 sm:gap-3">
+              <Image src="/images/orvyn-gem.png" alt="ORVYN" width={22} height={22} className="sm:w-[26px] sm:h-[26px]" />
+              <span className="font-display font-semibold text-sm sm:text-base tracking-widest" style={{ color:C.white }}>ORVYN</span>
             </div>
-            <p className="text-xs hidden md:block" style={{ color:'rgba(255,255,255,.28)' }}>
-              © 2026 ORVYN Sistemas. Todos os direitos reservados.
-            </p>
-            <div className="flex gap-4">
+            <p className="text-xs hidden md:block" style={{ color:'rgba(255,255,255,.28)' }}>© 2026 ORVYN Sistemas.</p>
+            <div className="flex gap-3 sm:gap-4">
               {['Privacidade','Termos'].map(l => (
                 <Link key={l} href="#" className="text-xs hover:opacity-80 transition-opacity"
                   style={{ color:'rgba(255,255,255,.3)' }}>{l}</Link>
@@ -425,73 +439,46 @@ function Slide6({ r, active }: { r:(el:HTMLDivElement|null)=>void; active:boolea
 }
 
 // ── Dot nav ────────────────────────────────────────────────────────────────────
-const DARK_SLIDES = new Set([0, 3, 6])
 function DotNav({ current }: { current: number }) {
-  const dark = DARK_SLIDES.has(current)
+  const dark = new Set([0,3,6]).has(current)
   return (
-    <div className="fixed right-5 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 pointer-events-none"
+    <div className="fixed right-3 sm:right-5 top-1/2 -translate-y-1/2 flex flex-col gap-2 pointer-events-none"
       style={{ zIndex: 200 }}>
       {Array.from({ length: 7 }, (_, i) => (
         <div key={i} className="rounded-full transition-all duration-300"
           style={{
-            width:  i === current ? 8 : 5,
-            height: i === current ? 8 : 5,
+            width:  i === current ? 7 : 4,
+            height: i === current ? 7 : 4,
             background: i === current ? C.brand : dark ? 'rgba(255,255,255,.25)' : 'rgba(168,34,221,.3)',
-            boxShadow: i === current ? `0 0 10px rgba(168,34,221,.7)` : 'none',
+            boxShadow: i === current ? `0 0 8px rgba(168,34,221,.7)` : 'none',
           }} />
       ))}
     </div>
   )
 }
 
-// ── Mobile LP ──────────────────────────────────────────────────────────────────
-import { Hero }               from './hero'
-import { FloatingIconMarquee } from './floating-icon-marquee'
-import { TextMarquee }        from './text-marquee'
-import { Pillars }            from './pillars'
-import { Products }           from './products'
-import { HowItWorks }         from './how-it-works'
-import { WhyOrvyn }           from './why-orvyn'
-import { Testimonials }       from './testimonials'
-import { FinalCTA }           from './final-cta'
-import { Footer }             from './footer'
-
-function MobileLP() {
-  return (
-    <main className="min-h-screen overflow-x-hidden page-bg">
-      <Hero /><FloatingIconMarquee /><TextMarquee /><Pillars />
-      <Products /><HowItWorks /><WhyOrvyn /><Testimonials />
-      <FinalCTA /><Footer />
-    </main>
-  )
-}
-
 // ── Main ───────────────────────────────────────────────────────────────────────
-const SLIDE_COUNT = 7
-// clip-path transition: odd slides enter from RIGHT, even from BELOW
-const clipFrom = (i: number) =>
-  i % 2 !== 0 ? 'inset(0 0 0 100%)' : 'inset(100% 0 0 0)'
-const clipTo = (_i: number) => 'inset(0% 0% 0% 0%)'
+const N = 7
 
 export function HorizontalExperience() {
   const outerRef  = useRef<HTMLDivElement>(null)
   const gemRef    = useRef<HTMLDivElement>(null)
-  const slideRefs = useRef<(HTMLDivElement | null)[]>(Array(SLIDE_COUNT).fill(null))
-
-  const [mounted,  setMounted]  = useState(false)
+  const sRefs     = useRef<(HTMLDivElement | null)[]>(Array(N).fill(null))
+  const [mounted, setMounted]   = useState(false)
+  const [current, setCurrent]   = useState(0)
   const [isMobile, setIsMobile] = useState(false)
-  const [current,  setCurrent]  = useState(0)
 
   useEffect(() => { setMounted(true) }, [])
+
   useEffect(() => {
-    const check = () => setIsMobile(window.innerWidth < 768)
+    const check = () => setIsMobile(window.innerWidth < 640)
     check()
     window.addEventListener('resize', check)
     return () => window.removeEventListener('resize', check)
   }, [])
 
   useEffect(() => {
-    if (!mounted || isMobile) return
+    if (!mounted) return
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let ctx: any
 
@@ -502,68 +489,64 @@ export function HorizontalExperience() {
 
       const outer  = outerRef.current
       const gem    = gemRef.current
-      const slides = slideRefs.current.filter(Boolean) as HTMLDivElement[]
-      if (!outer || slides.length < SLIDE_COUNT) return
+      const slides = sRefs.current.filter(Boolean) as HTMLDivElement[]
+      if (!outer || slides.length < N) return
+
+      const mobile = window.innerWidth < 640
+      const gemPos = mobile ? GEM.mobile : GEM.desktop
+      const scrub  = mobile ? 1.2 : 2
 
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ctx = gsap.context((): void => {
 
-        // ── z-index: later slides stack on top ─────────────────────────────
+        // z-index stacking
         slides.forEach((s, i) => gsap.set(s, { zIndex: 10 + i }))
 
-        // ── initial clip: slides 1-6 fully hidden ─────────────────────────
+        // initial clip-path: slides 1-6 fully hidden
         slides.forEach((s, i) => {
           if (i === 0) return
           gsap.set(s, { clipPath: clipFrom(i) })
         })
 
-        // ── gem: initial position ─────────────────────────────────────────
+        // gem initial position
         if (gem) {
           gsap.set(gem, {
             position: 'absolute',
-            xPercent: -50,
-            yPercent: -50,
-            left: GEM[0].l,
-            top:  GEM[0].t,
-            scale: GEM[0].s,
+            xPercent: -50, yPercent: -50,
+            left: gemPos[0].l, top: gemPos[0].t, scale: gemPos[0].s,
           })
         }
 
-        // ── master timeline: scroll drives clip-path reveal + gem ─────────
+        // master timeline: scroll → clip-path reveal + gem movement
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: outer,
             pin: true,
-            scrub: 2,
+            scrub,
             start: 'top top',
-            end: () => `+=${(SLIDE_COUNT - 1) * window.innerHeight}`,
+            end: () => `+=${(N - 1) * window.innerHeight}`,
             invalidateOnRefresh: true,
             onUpdate(self) {
-              // progress 0–1 maps to slides 0–6
-              const raw = self.progress * (SLIDE_COUNT - 1)
-              setCurrent(Math.min(SLIDE_COUNT - 1, Math.round(raw)))
+              setCurrent(Math.min(N - 1, Math.round(self.progress * (N - 1))))
             },
           },
         })
 
-        for (let i = 1; i < SLIDE_COUNT; i++) {
-          const pos = i - 1 // timeline label 0, 1, 2 …
+        for (let i = 1; i < N; i++) {
+          const pos = i - 1
 
-          // Reveal slide i over the current one (no translate, just clip-path)
+          // reveal slide i over slide i-1 (background stays still)
           tl.to(slides[i], {
-            clipPath: clipTo(i),
+            clipPath: 'inset(0% 0% 0% 0%)',
             duration: 1,
             ease: 'power1.inOut',
           }, pos)
 
-          // Gem moves to the new position
-          if (gem && GEM[i]) {
+          // gem transitions to new position
+          if (gem && gemPos[i]) {
             tl.to(gem, {
-              left:  GEM[i].l,
-              top:   GEM[i].t,
-              scale: GEM[i].s,
-              duration: 0.55,
-              ease: 'power2.inOut',
+              left: gemPos[i].l, top: gemPos[i].t, scale: gemPos[i].s,
+              duration: 0.55, ease: 'power2.inOut',
             }, pos + 0.18)
           }
         }
@@ -574,44 +557,47 @@ export function HorizontalExperience() {
 
     const t = setTimeout(setup, 200)
     return () => { clearTimeout(t); ctx?.revert() }
-  }, [mounted, isMobile])
+  }, [mounted])
 
   if (!mounted) return null
-  if (isMobile) return <MobileLP />
 
-  const r = (i: number) => (el: HTMLDivElement | null) => { slideRefs.current[i] = el }
+  const r = (i: number) => (el: HTMLDivElement | null) => { sRefs.current[i] = el }
 
   return (
     <>
       <DotNav current={current} />
 
-      {/* Pinned outer container */}
       <div ref={outerRef} className="relative w-screen h-screen overflow-hidden">
 
-        {/* Floating gem — absolute, above all slides, animated by GSAP */}
+        {/* Floating gem — GSAP controls position */}
         <div ref={gemRef} className="absolute pointer-events-none" style={{ zIndex: 150 }}>
           <motion.div
             animate={{
               filter: [
-                'drop-shadow(0 0 10px rgba(168,34,221,.45))',
-                'drop-shadow(0 0 32px rgba(168,34,221,.95))',
-                'drop-shadow(0 0 10px rgba(168,34,221,.45))',
+                `drop-shadow(0 0 ${isMobile ? 8 : 10}px rgba(168,34,221,.45))`,
+                `drop-shadow(0 0 ${isMobile ? 22 : 32}px rgba(168,34,221,.95))`,
+                `drop-shadow(0 0 ${isMobile ? 8 : 10}px rgba(168,34,221,.45))`,
               ],
             }}
             transition={{ duration: 2.6, repeat: Infinity, ease: 'easeInOut' }}
           >
-            <Image src="/images/orvyn-gem.png" alt="" width={52} height={52} aria-hidden />
+            <Image
+              src="/images/orvyn-gem.png" alt=""
+              width={isMobile ? 36 : 52}
+              height={isMobile ? 36 : 52}
+              aria-hidden
+            />
           </motion.div>
         </div>
 
-        {/* Slides — stacked absolutely, revealed by clip-path */}
-        <Slide0 r={r(0)} active={current === 0} />
-        <Slide1 r={r(1)} active={current === 1} />
-        <Slide2 r={r(2)} active={current === 2} />
-        <Slide3 r={r(3)} active={current === 3} />
-        <Slide4 r={r(4)} active={current === 4} />
-        <Slide5 r={r(5)} active={current === 5} />
-        <Slide6 r={r(6)} active={current === 6} />
+        {/* Slides */}
+        <S0 r={r(0)} active={current === 0} />
+        <S1 r={r(1)} active={current === 1} />
+        <S2 r={r(2)} active={current === 2} />
+        <S3 r={r(3)} active={current === 3} />
+        <S4 r={r(4)} active={current === 4} />
+        <S5 r={r(5)} active={current === 5} />
+        <S6 r={r(6)} active={current === 6} />
       </div>
     </>
   )
