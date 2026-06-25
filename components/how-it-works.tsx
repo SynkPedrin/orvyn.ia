@@ -112,7 +112,7 @@ export function HowItWorks() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.7, delay: i * 0.1 + 0.2 }}
-              className="pt-8 pb-8 pr-8"
+              className="pt-8 pb-8 pr-0 lg:pr-8"
               style={{ borderTop: '1px solid rgba(26,26,46,0.1)' }}
             >
               <span

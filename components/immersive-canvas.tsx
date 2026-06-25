@@ -209,7 +209,7 @@ export function ImmersiveCanvas() {
                   animate={{ y: 0 }}
                   transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                   className="font-display font-bold leading-[0.88] tracking-tight"
-                  style={{ fontSize: 'clamp(5rem, 14vw, 14rem)', color: '#f2f0fc' }}
+                  style={{ fontSize: 'clamp(2.5rem, 14vw, 14rem)', color: '#f2f0fc' }}
                 >
                   ORVYN
                 </motion.h1>
@@ -224,7 +224,7 @@ export function ImmersiveCanvas() {
                   animate={{ y: 0 }}
                   transition={{ delay: 0.65, duration: 1, ease: [0.16, 1, 0.3, 1] }}
                   className="font-display font-bold leading-[0.88] tracking-tight text-right"
-                  style={{ fontSize: 'clamp(5rem, 14vw, 14rem)', color: '#f2f0fc' }}
+                  style={{ fontSize: 'clamp(2.5rem, 14vw, 14rem)', color: '#f2f0fc' }}
                 >
                   SISTEMAS
                 </motion.h1>
@@ -233,14 +233,14 @@ export function ImmersiveCanvas() {
 
             {/* Bottom bar */}
             <div
-              className="absolute bottom-0 left-0 right-0 flex items-end justify-between px-6 sm:px-10 lg:px-14"
+              className="absolute bottom-0 left-0 right-0 flex flex-col-reverse sm:flex-row sm:items-end sm:justify-between gap-4 sm:gap-0 px-6 sm:px-10 lg:px-14"
               style={{ paddingBottom: 'clamp(20px,4vh,40px)' }}
             >
               <motion.p
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.7 }}
-                className="text-xs sm:text-sm max-w-xs leading-relaxed"
+                className="hidden sm:block text-xs sm:text-sm max-w-xs leading-relaxed"
                 style={{ color: 'rgba(255,255,255,0.3)' }}
               >
                 VOCÊ ESTÁ PRONTO PARA<br />ENTRAR NO FUTURO?
@@ -250,7 +250,7 @@ export function ImmersiveCanvas() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: loaded ? 1 : 0.4 }}
                 transition={{ delay: 1.1, duration: 0.7 }}
-                className="flex items-center gap-3"
+                className="flex items-center gap-3 self-end sm:self-auto"
               >
                 {/* Progress arc */}
                 <div className="relative" style={{ width: 44, height: 44 }}>

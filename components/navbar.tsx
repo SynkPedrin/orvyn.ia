@@ -37,6 +37,7 @@ export function Navbar() {
           width: isExpanded ? 'auto' : isScrolled ? 180 : 320,
           borderRadius: 50,
         }}
+        style={{ maxWidth: 'calc(100vw - 32px)' }}
         transition={{ 
           type: 'spring', 
           stiffness: 400, 

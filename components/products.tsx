@@ -65,7 +65,7 @@ export function Products() {
             <br />
             <span className="text-gradient">para nichos específicos.</span>
           </h2>
-          <p className="text-lg max-w-2xl" style={{ color: 'rgba(26,26,46,0.55)' }}>
+          <p className="text-base sm:text-lg max-w-2xl" style={{ color: 'rgba(26,26,46,0.55)' }}>
             Não vendemos genérico. Cada produto nasce de uma dor real, validada em campo,
             resolvida com precisão de engenharia.
           </p>

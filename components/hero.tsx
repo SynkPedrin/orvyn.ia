@@ -45,7 +45,7 @@ export function Hero() {
     <section
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
-      style={{ paddingTop: '120px', paddingBottom: '80px' }}
+      style={{ paddingTop: 'clamp(80px, 12vw, 120px)', paddingBottom: '80px' }}
     >
       {/* Top hairline */}
       <motion.div
