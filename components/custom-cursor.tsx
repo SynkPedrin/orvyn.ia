@@ -1,85 +1,88 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion, useSpring, useMotionValue } from 'framer-motion'
+import Image from 'next/image'
 
 type CursorState = 'default' | 'hover' | 'click' | 'text'
 
 export function CustomCursor() {
   const [state, setState] = useState<CursorState>('default')
   const [mounted, setMounted] = useState(false)
+  const clickSfxRef = useRef<HTMLAudioElement | null>(null)
 
   const mouseX = useMotionValue(-200)
   const mouseY = useMotionValue(-200)
 
-  const springCfg = { damping: 22, stiffness: 380, mass: 0.4 }
+  // Main gem: fast spring
+  const springCfg = { damping: 20, stiffness: 360, mass: 0.35 }
   const x = useSpring(mouseX, springCfg)
   const y = useSpring(mouseY, springCfg)
 
-  // Trailing dot — slightly slower spring
-  const trailX = useSpring(mouseX, { damping: 35, stiffness: 180, mass: 0.6 })
-  const trailY = useSpring(mouseY, { damping: 35, stiffness: 180, mass: 0.6 })
+  // Trail ring: slower spring
+  const trailX = useSpring(mouseX, { damping: 32, stiffness: 140, mass: 0.7 })
+  const trailY = useSpring(mouseY, { damping: 32, stiffness: 140, mass: 0.7 })
 
   useEffect(() => {
     setMounted(true)
+    clickSfxRef.current = new Audio('/click.mp3')
+    if (clickSfxRef.current) clickSfxRef.current.volume = 0.45
+  }, [])
 
+  useEffect(() => {
     const onMove = (e: MouseEvent) => {
       mouseX.set(e.clientX)
       mouseY.set(e.clientY)
     }
 
-    const onDown = () => setState('click')
-    const onUp   = () => setState((s) => (s === 'click' ? 'default' : s))
+    const onDown = () => {
+      setState('click')
+      // Play click sound on cursor click
+      if (clickSfxRef.current) {
+        clickSfxRef.current.currentTime = 0
+        clickSfxRef.current.play().catch(() => {})
+      }
+    }
+    const onUp = () => setState(s => s === 'click' ? 'default' : s)
 
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement
       const isInteractive =
-        t.tagName === 'A' ||
-        t.tagName === 'BUTTON' ||
-        t.closest('a') ||
-        t.closest('button') ||
+        t.tagName === 'A' || t.tagName === 'BUTTON' ||
+        t.closest('a') || t.closest('button') ||
         t.getAttribute('role') === 'button' ||
         t.closest('[role="button"]') ||
         t.dataset.cursor === 'hover'
 
       const isText =
-        t.tagName === 'INPUT' ||
-        t.tagName === 'TEXTAREA' ||
-        t.closest('input') ||
-        t.closest('textarea')
+        t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' ||
+        t.closest('input') || t.closest('textarea')
 
-      if (isText) {
-        setState('text')
-      } else if (isInteractive) {
-        setState('hover')
-      }
+      if (isText) setState('text')
+      else if (isInteractive) setState('hover')
     }
 
     const onOut = (e: MouseEvent) => {
       const related = e.relatedTarget as HTMLElement | null
-      if (!related) setState('default')
-
+      if (!related) { setState('default'); return }
       const isInteractive =
-        related?.tagName === 'A' ||
-        related?.tagName === 'BUTTON' ||
-        related?.closest?.('a') ||
-        related?.closest?.('button')
-
+        related.tagName === 'A' || related.tagName === 'BUTTON' ||
+        related.closest?.('a') || related.closest?.('button')
       if (!isInteractive) setState('default')
     }
 
     window.addEventListener('mousemove', onMove)
     window.addEventListener('mousedown', onDown)
-    window.addEventListener('mouseup', onUp)
+    window.addEventListener('mouseup',   onUp)
     document.addEventListener('mouseover', onOver)
-    document.addEventListener('mouseout', onOut)
+    document.addEventListener('mouseout',  onOut)
 
     return () => {
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mousedown', onDown)
-      window.removeEventListener('mouseup', onUp)
+      window.removeEventListener('mouseup',   onUp)
       document.removeEventListener('mouseover', onOver)
-      document.removeEventListener('mouseout', onOut)
+      document.removeEventListener('mouseout',  onOut)
     }
   }, [mouseX, mouseY])
 
@@ -88,99 +91,120 @@ export function CustomCursor() {
   const isHover = state === 'hover'
   const isClick = state === 'click'
 
+  // Gem size reacts to state
+  const gemSize = isHover ? 52 : isClick ? 28 : 36
+  const gemScale = isClick ? 0.72 : 1
+  const glowSize = isHover ? 80 : isClick ? 40 : 52
+  const glowOpacity = isHover ? 0.5 : isClick ? 0.8 : 0.25
+
   return (
     <>
-      {/* Global cursor: none */}
+      {/* Hide native cursor */}
       <style>{`* { cursor: none !important; }`}</style>
 
-      {/* Trailing ring — larger, slower */}
+      {/* Trail ring — orbit behind gem */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[10003] hidden md:block"
-        style={{
-          x: trailX,
-          y: trailY,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
+        className="fixed top-0 left-0 pointer-events-none z-[10002] hidden md:block"
+        style={{ x: trailX, y: trailY, translateX: '-50%', translateY: '-50%' }}
       >
         <motion.div
           animate={{
-            width:  isHover ? 52 : isClick ? 28 : 38,
-            height: isHover ? 52 : isClick ? 28 : 38,
-            opacity: isHover ? 0.45 : 0.2,
+            width:  isHover ? 70 : 48,
+            height: isHover ? 70 : 48,
+            opacity: isHover ? 0.4 : 0.15,
             borderColor: isHover
-              ? 'rgba(147, 51, 234, 0.8)'
-              : 'rgba(147, 51, 234, 0.4)',
+              ? 'rgba(200,80,255,0.7)'
+              : 'rgba(168,34,221,0.3)',
           }}
-          transition={{ duration: 0.35 }}
-          style={{ borderRadius: '50%', border: '1.5px solid rgba(147,51,234,0.4)' }}
+          transition={{ duration: 0.3 }}
+          style={{
+            borderRadius: '50%',
+            border: '1.5px solid rgba(168,34,221,0.3)',
+          }}
         />
       </motion.div>
 
-      {/* Main sphere */}
+      {/* Glow halo behind gem */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-[10005] hidden md:block"
-        style={{
-          x,
-          y,
-          translateX: '-50%',
-          translateY: '-50%',
-        }}
+        className="fixed top-0 left-0 pointer-events-none z-[10003] hidden md:block"
+        style={{ x, y, translateX: '-50%', translateY: '-50%' }}
       >
         <motion.div
           animate={{
-            width:  isHover ? 28 : isClick ? 10 : 16,
-            height: isHover ? 28 : isClick ? 10 : 16,
-            scale: isClick ? 0.8 : 1,
+            width:   glowSize,
+            height:  glowSize,
+            opacity: glowOpacity,
           }}
-          transition={{ duration: 0.25, ease: 'easeOut' }}
+          transition={{ duration: 0.25 }}
           style={{
             borderRadius: '50%',
-            background: isHover
-              ? 'radial-gradient(circle at 35% 35%, rgba(220,180,255,1) 0%, rgba(147,51,234,0.95) 45%, rgba(80,20,140,0.9) 100%)'
-              : isClick
-              ? 'radial-gradient(circle at 35% 35%, #fff 0%, rgba(200,150,255,0.95) 40%, rgba(147,51,234,0.9) 100%)'
-              : 'radial-gradient(circle at 35% 35%, rgba(220,190,255,0.95) 0%, rgba(147,51,234,0.85) 50%, rgba(80,20,140,0.8) 100%)',
-            boxShadow: isHover
-              ? '0 0 18px 6px rgba(147,51,234,0.45), inset -3px -3px 6px rgba(80,20,140,0.5), inset 2px 2px 4px rgba(255,255,255,0.35)'
-              : isClick
-              ? '0 0 8px 3px rgba(147,51,234,0.6), inset -1px -1px 3px rgba(80,20,140,0.4), inset 1px 1px 2px rgba(255,255,255,0.5)'
-              : '0 0 10px 3px rgba(147,51,234,0.25), inset -2px -2px 4px rgba(80,20,140,0.4), inset 1.5px 1.5px 3px rgba(255,255,255,0.3)',
+            background: 'radial-gradient(circle, rgba(168,34,221,0.6) 0%, rgba(168,34,221,0.2) 50%, transparent 70%)',
           }}
+        />
+      </motion.div>
+
+      {/* Click burst ring — appears on click */}
+      {isClick && (
+        <motion.div
+          className="fixed top-0 left-0 pointer-events-none z-[10004] hidden md:block"
+          style={{ x, y, translateX: '-50%', translateY: '-50%' }}
         >
-          {/* Specular highlight */}
           <motion.div
-            animate={{
-              width:  isHover ? 8 : 4,
-              height: isHover ? 8 : 4,
-              opacity: isClick ? 0.4 : 0.85,
-            }}
-            transition={{ duration: 0.25 }}
+            initial={{ scale: 0.5, opacity: 0.9 }}
+            animate={{ scale: 2.8, opacity: 0 }}
+            transition={{ duration: 0.45, ease: 'easeOut' }}
             style={{
-              position: 'absolute',
-              top: '20%',
-              left: '22%',
+              width: 36, height: 36,
               borderRadius: '50%',
-              background: 'rgba(255,255,255,0.9)',
-              filter: 'blur(1px)',
+              border: '2px solid rgba(200,80,255,0.8)',
             }}
           />
         </motion.div>
+      )}
 
-        {/* Hover glow ring pulse */}
-        {isHover && (
-          <motion.div
-            initial={{ scale: 0.6, opacity: 0.6 }}
-            animate={{ scale: 2.2, opacity: 0 }}
-            transition={{ duration: 0.7, repeat: Infinity, ease: 'easeOut' }}
+      {/* Gem logo — main cursor */}
+      <motion.div
+        className="fixed top-0 left-0 pointer-events-none z-[10005] hidden md:block"
+        style={{ x, y, translateX: '-50%', translateY: '-50%' }}
+      >
+        <motion.div
+          animate={{ width: gemSize, height: gemSize, scale: gemScale }}
+          transition={{ duration: 0.22, ease: 'easeOut' }}
+          style={{ position: 'relative' }}
+        >
+          {/* Specular ring on hover */}
+          {isHover && (
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0.7 }}
+              animate={{ scale: 1.6, opacity: 0 }}
+              transition={{ duration: 0.6, repeat: Infinity, ease: 'easeOut' }}
+              style={{
+                position: 'absolute',
+                inset: -4,
+                borderRadius: '50%',
+                border: '1px solid rgba(200,80,255,0.6)',
+              }}
+            />
+          )}
+
+          <Image
+            src="/images/orvyn-gem.png"
+            alt=""
+            fill
+            sizes="64px"
+            className="object-contain"
             style={{
-              position: 'absolute',
-              inset: 0,
-              borderRadius: '50%',
-              border: '1px solid rgba(147,51,234,0.5)',
+              filter: isHover
+                ? 'drop-shadow(0 0 14px rgba(200,80,255,0.9)) drop-shadow(0 0 6px rgba(168,34,221,0.6))'
+                : isClick
+                ? 'drop-shadow(0 0 20px rgba(255,100,255,1)) brightness(1.4)'
+                : 'drop-shadow(0 0 8px rgba(168,34,221,0.55))',
+              mixBlendMode: 'screen',
+              transition: 'filter 0.2s ease',
             }}
+            priority
           />
-        )}
+        </motion.div>
       </motion.div>
     </>
   )
