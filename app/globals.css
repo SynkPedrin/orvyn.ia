@@ -148,30 +148,35 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #07060f; /* dark bg visible behind the 3D canvas */
+    background-color: #030308;
   }
 
   body {
     background-color: transparent;
-    color: #1a1a2e;
+    color: #f0eeff;
     font-family: var(--font-sans);
+    /* Prevent horizontal scroll from cursor overflow */
+    overflow-x: hidden;
   }
 
-  /* Sections are semi-transparent so the 3D canvas bleeds through — Noomo-style */
   main, section {
     position: relative;
     z-index: 2;
-  }
-
-  /* Off-white tint that lets the 3D show subtly */
-  .page-bg {
-    background-color: rgba(245,243,238,0.88);
   }
 
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
   }
 }
+
+/* ── Liquid metal scrollbar ──────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #030308; }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #A822DD, #CC55EC);
+  border-radius: 3px;
+}
+::selection { background: rgba(168,34,221,0.3); color: #f0eeff; }
 
 @layer utilities {
   .font-display {

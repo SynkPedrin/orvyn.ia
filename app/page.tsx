@@ -1,11 +1,12 @@
 import { Navbar } from '@/components/navbar'
-import { BackgroundAnimation } from '@/components/background-animation'
+import { ThreeScene } from '@/components/three-scene'
 import { HorizontalExperience } from '@/components/horizontal-experience'
 
 export default function HomePage() {
   return (
     <>
-      <BackgroundAnimation />
+      {/* Three.js liquid metal scene — fixed background */}
+      <ThreeScene />
       <Navbar />
       <HorizontalExperience />
     </>
